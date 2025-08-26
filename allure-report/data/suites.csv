@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","3938","homepage","chromium","Mon Aug 25 19:13:16 SGT 2025","passed","Mon Aug 25 19:13:20 SGT 2025","","alltest.spec.js","",""
+"","6557","phonespage","chromium","Mon Aug 25 19:13:24 SGT 2025","passed","Mon Aug 25 19:13:30 SGT 2025","","alltest.spec.js","",""
