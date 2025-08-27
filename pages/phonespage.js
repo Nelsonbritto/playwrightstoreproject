@@ -3,7 +3,7 @@ export class phonespage{
     constructor(page){
         this.page = page;
         this.phone = "//a[.='Phones']";
-        this.allmobiles = "#tbodyid h4 a";
+        this.allmobiles = "//h4[@class='card-title']//a";
         this.phoneimage = "#imgp img";
         this.pagetitle = "#tbodyid h2";
         this.addtocart = "//a[.='Add to cart']";
@@ -21,8 +21,9 @@ for(let x of mobiles)
 {
   console.log(await x.textContent());
 }
-//await mobiles[0].waitFor({ state: "visible" });
-await mobiles[0].click();
+  await this.page.waitForSelector(this.allmobiles);
+const firstmobile =  await this.page.$$(this.allmobiles)
+await firstmobile[0].click();
 }
 async firstphonefun(){
 console.log(await this.page.url());
