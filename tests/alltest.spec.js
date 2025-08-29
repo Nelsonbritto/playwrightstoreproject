@@ -2,7 +2,9 @@ import{test, expect} from '@playwright/test';
 import{basepage} from '../pages/basepage';
 import { homepage } from '../pages/homepage';
 import { phonespage } from '../pages/phonespage';
-const json = require('../utils/data.json')
+import { signuppage } from '../pages/signuppage';
+const data = require('../utils/data.json')
+
 
  let context;
  let page;
@@ -11,7 +13,7 @@ test.beforeEach('startapp', async({browser}) =>{
     context = await browser.newContext();
     page = await context.newPage();
 const base = new basepage(page);
- await base.enterurl(json.headurl.url)
+ await base.enterurl(data.headurl.url)
 })
 
 test.afterEach('teardown', async() =>{
@@ -21,9 +23,9 @@ test.afterEach('teardown', async() =>{
 test('homepage', async()=>{
     const home = new homepage(page);
    const url = await home.checkurl(); 
-   await expect(await url).toBe(json.headurl.url);
+   await expect(await url).toBe(data.headurl.url);
    const title = await home.checktitle();
-   await expect(await title).toBe(json.headtitle.title);
+   await expect(await title).toBe(data.headtitle.title);
    const logofun = await home.logofun();
    await expect(logofun).toBeTruthy();
    await home.navbarfun();
@@ -52,5 +54,19 @@ test('phonespage',async()=>{
    } 
    await cart();
  await phones.returnhomefun();
+})
+
+test('signuppage',async() =>{
+    
+const signup = new signuppage(page);
+await signup.signupbuttonfun();
+ await signup.checktitlefun();
+await signup.checkusernamefun();
+ await signup.checkpasswordfun();
+await signup.signupdatafun();
+await signup.signupbuttonfun();
+await signup.verifysignupdatafun();
+await signup.closepagefun();
+
 })
 
