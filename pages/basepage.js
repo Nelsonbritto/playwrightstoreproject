@@ -1,20 +1,21 @@
-
+import { expect } from '@playwright/test'
+const base = require('../utils/basedata.json')
 
 export class basepage {
     constructor(page) {
         this.page = page;
     }
 
-    async enterurl(url) {
-        await this.page.goto(url);
-    
+    async enterurl() {
+        await this.page.goto(base.headurl.url);
+
     }
 
     async closepage() {
         await this.page.close();
-       
+
     }
 
-   
-    }
+
+}
 

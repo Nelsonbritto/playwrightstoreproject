@@ -15,8 +15,10 @@ export class signuppage {
     }
 
     async signupbuttonfun() {
+        await this.page.reload();
         await this.page.waitForSelector(this.signupbutton)
-        await this.page.click(this.signupbutton);
+        await this.page.click(this.signupbutton)
+
     }
 
     async checktitlefun() {
@@ -30,30 +32,33 @@ export class signuppage {
     }
 
     async checkpasswordfun() {
-       const password = await this.page.locator(this.passwordlabel).textContent();
-       await expect(await password).toBe(signupdata.title.passwordtitle)
+        const password = await this.page.locator(this.passwordlabel).textContent();
+        await expect(await password).toBe(signupdata.title.passwordtitle)
     }
 
-    async signupdatafun() {
-        await this.page.fill(this.username, signupdata.user1.username)
+    async signupdatafun(username) {
+        await this.page.fill(this.username, username)
         await this.page.fill(this.password, signupdata.user1.password)
         await this.page.once('dialog', async dialog => {
-            await expect(dialog.type()).toContain('alert');
-            await expect(dialog.message()).toBe('Sign up successful.');
+            expect(dialog.type()).toContain('alert');
+            expect(dialog.message()).toBe('Sign up successful.');
             await dialog.accept();
         })
         await this.page.click(this.signupuser);
+        await this.page.waitForEvent('dialog');
+
     }
 
-    async verifysignupdatafun() {
+    async verifysignupdatafun(username) {
         await this.page.fill(this.username, '');
         await this.page.fill(this.password, '');
-        await this.page.fill(this.username, signupdata.user1.username)
+        await this.page.fill(this.username, username)
+        console.log("username:", username)
         await this.page.fill(this.password, signupdata.user1.password)
 
         await this.page.once('dialog', async dialog => {
-            await expect(dialog.type()).toContain('alert');
-            await expect(dialog.message()).toBe('This user already exist.');
+            expect(dialog.type()).toContain('alert');
+            expect(dialog.message()).toBe('This user already exist.');
             await dialog.accept();
         });
         await this.page.click(this.signupuser);

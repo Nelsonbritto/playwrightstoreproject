@@ -34,6 +34,7 @@ await page.fill("#sign-password",signupdata.user1.password) //this.password
     })
  await page.click("//button[.='Sign up']"); //this.signupuser
  await page.pause();
+
     await page.click("//button[.='Sign up']//parent::div//button[.='Close']"); //this.close
    
 })
